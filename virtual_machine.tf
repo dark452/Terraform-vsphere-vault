@@ -36,22 +36,22 @@ resource "vsphere_virtual_machine" "vm_template" {
     template_uuid = data.vsphere_virtual_machine.template.id
     linked_clone  = "false"
 
-       customize {
-           timeout = "20"
+    customize {
+      timeout = "20"
 
-         linux_options {
-           host_name = "${var.vm_prefix}-${count.index + 1}"
-           domain    = var.vm_domain
-         }
+      linux_options {
+        host_name = "${var.vm_prefix}-${count.index + 1}"
+        domain    = var.vm_domain
+      }
 
-         network_interface {
-           ipv4_address = var.ipv4_address[count.index]
-           ipv4_netmask = var.ipv4_netmask
-         }
+      network_interface {
+        ipv4_address = var.ipv4_address[count.index]
+        ipv4_netmask = var.ipv4_netmask
+      }
 
-         ipv4_gateway    = var.ipv4_gateway
-         dns_server_list = var.dns
-         dns_suffix_list = [var.vm_domain]
-       }
-     }
+      ipv4_gateway    = var.ipv4_gateway
+      dns_server_list = var.dns
+      dns_suffix_list = [var.vm_domain]
+    }
   }
+}
