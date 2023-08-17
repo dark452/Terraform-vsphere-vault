@@ -40,12 +40,12 @@ resource "vsphere_virtual_machine" "vm_template" {
            timeout = "20"
 
          linux_options {
-           host_name = "${var.vm_prefix}-master-${count.index + 1}"
+           host_name = "${var.vm_prefix}-${count.index + 1}"
            domain    = var.vm_domain
          }
 
          network_interface {
-           ipv4_address = var.ipv4_address_master[count.index]
+           ipv4_address = var.ipv4_address[count.index]
            ipv4_netmask = var.ipv4_netmask
          }
 
