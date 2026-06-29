@@ -4,8 +4,8 @@ locals {
 
 # Create Server VM
 resource "vsphere_virtual_machine" "vm_template" {
-  count = length(var.vm_hosts)
-  name  = "${var.vm_hosts[count.index]}.${var.vm_domain}"
+  count            = length(var.vm_hosts)
+  name             = "${var.vm_hosts[count.index]}.${var.vm_domain}"
   resource_pool_id = var.vsphere_cluster_enabled == true ? local.rs_pool_id : data.vsphere_host.esxi_hosts[count.index].resource_pool_id
   host_system_id   = data.vsphere_host.esxi_hosts[count.index].id
   datastore_id     = data.vsphere_datastore.datastore["mapping${count.index + 1}"].id
